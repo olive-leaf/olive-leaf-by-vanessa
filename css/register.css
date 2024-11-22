@@ -1,0 +1,65 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+p {
+  color: red;
+  font-size: 14px;
+}
+.login-opt {
+  display: none;
+}
+
+#signup-form {
+  display: none; 
+}
+
+#admin-login,
+#user-login {
+  display: none;
+}
+
+button {
+  background-color: #82a14f;
+  margin: 10px;
+  border: none;
+  font-size: 15px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.start-up {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

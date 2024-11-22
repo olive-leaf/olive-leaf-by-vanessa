@@ -1,0 +1,266 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/register.css" />
+    <link rel="icon" href="images/olive-leaf-by-vanessa-removebg-preview.png" />
+
+    <title>Register</title>
+  </head>
+  <body style="font-family: Arial, Helvetica, sans-serif;">
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+      } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyC44lD3CIOOJkgnt_E_Hb_xmBpZe6T8HoE",
+        authDomain: "olive-leaf-ea098.firebaseapp.com",
+        projectId: "olive-leaf-ea098",
+        storageBucket: "olive-leaf-ea098.appspot.com",
+        messagingSenderId: "390739993530",
+        appId: "1:390739993530:web:dfcbbfdc6da24ade167383",
+        measurementId: "G-F3NNRRF6WZ",
+        databaseURL: "https://olive-leaf-ea098-default-rtdb.firebaseio.com/",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getDatabase(app);
+      const auth = getAuth();
+
+      document
+        .getElementById("signupbtn")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          var email = document.getElementById("sEmail").value;
+          var firstname = document.getElementById("fn").value;
+          var lastname = document.getElementById("ln").value;
+          var address = document.getElementById("address").value;
+          var password = document.getElementById("sPassword").value;
+          var cpass = document.getElementById("sConfirmPassword").value;
+          var mobile = document.getElementById("phone").value;
+
+          if (password !== cpass) {
+            document.getElementById("signupError").innerText =
+              "Passwords do not match.";
+            return;
+          }
+
+          try {
+            const userCredential = await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            const user = userCredential.user;
+
+            await set(ref(db, "users/" + user.uid), {
+              firstname: firstname,
+              lastname: lastname,
+              address: address,
+              email: email,
+              mobile: mobile,
+            });
+
+            console.log("User registered successfully:", user.uid);
+            document.getElementById("fn").value = "";
+            document.getElementById("ln").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("sEmail").value = "";
+            document.getElementById("sPassword").value = "";
+            document.getElementById("sConfirmPassword").value = "";
+            document.getElementById("phone").value = "";
+
+            window.location.href = "index.html";
+          } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            document.getElementById("signupError").innerText = errorMessage;
+            console.error("Error signing up:", errorMessage);
+          }
+        });
+
+      document
+        .getElementById("user-login")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("user-credential").value;
+          const password = document.getElementById("upassword").value;
+
+          try {
+            await signInWithEmailAndPassword(auth, email, password);
+            console.log("User logged in successfully");
+
+            window.location.href = "index.html";
+          } catch (error) {
+            const errorMessage = error.message;
+            document.getElementById("loginError").innerText = errorMessage;
+            console.error("Error logging in:", errorMessage);
+          }
+        });
+
+      const storedEmail = "blackpanther16123@gmail.com";
+      const storedPassword = "Quantumjade#123";
+
+      async function login(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("admin-credential").value;
+        const password = document.getElementById("admin-password").value;
+
+        if (email === storedEmail && password === storedPassword) {
+          try {
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.href = "inventory.html";
+          } catch (error) {
+            console.error("Error during login:", error);
+            alert("Login failed! Please try again.");
+          }
+        } else {
+          alert("Invalid credentials. Please check your email and password.");
+        }
+      }
+
+      document.getElementById("admin").addEventListener("submit", login);
+    </script>
+
+    <script>
+      function showSignUpForm() {
+        document.getElementById("signup-form").style.display = "block";
+        document.getElementById("btn1").classList.add("hidden");
+        document.getElementById("btn2").classList.add("hidden");
+      }
+
+      function logIn() {
+        document.getElementById("btn1").classList.add("hidden");
+        document.getElementById("btn2").classList.add("hidden");
+        document.getElementById("login-opt").style.display = "block";
+      }
+
+      function loginType(type) {
+        document.getElementById("adminbtn").classList.add("hidden");
+        document.getElementById("userbtn").classList.add("hidden");
+
+        if (type == "admin") {
+          document.getElementById("admin-login").style.display = "block";
+          document.getElementById("user-login").classList.add("hidden");
+        } else if (type == "user") {
+          document.getElementById("admin-login").classList.add("hidden");
+          document.getElementById("user-login").style.display = "block";
+        }
+      }
+    </script>
+
+    <div class="start-up">
+      <h1>Hi! Welcome to Olive Leaf by Vanessa!</h1>
+      <button id="btn1" class="btn" onclick="logIn()">Log In</button>
+      <button id="btn2" class="btn" onclick="showSignUpForm()">Sign Up</button>
+
+      <div class="login-opt" id="login-opt">
+        <button id="adminbtn" class="btn" onclick="loginType('admin')">
+          I'm an Administrator
+        </button>
+        <button id="userbtn" class="btn" onclick="loginType('user')">
+          I'm a Customer
+        </button>
+      </div>
+
+      <div id="forms">
+        <form id="signup-form">
+          <label for="fn">First Name</label>
+          <input
+            type="text"
+            id="fn"
+            name="fn"
+            placeholder="E.g. Jessica"
+          /><br />
+
+          <label for="ln">Last Name</label>
+          <input type="text" id="ln" name="ln" placeholder="E.g. Smith" /><br />
+
+          <label for="address">Address</label>
+          <textarea id="address" placeholder="Address"></textarea><br />
+
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" placeholder="Mobile No." /><br />
+
+          <label for="email">Email ID</label>
+          <input
+            type="email"
+            id="sEmail"
+            name="email"
+            placeholder="E.g abcdefg@gmail.com"
+          /><br />
+
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="sPassword"
+            name="password"
+            placeholder="Enter Password"
+          /><br />
+
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="sConfirmPassword"
+            name="confirm-password"
+            placeholder="Confirm Password"
+          /><br />
+
+          <button type="submit" id="signupbtn">Sign Up</button>
+          <p id="signupError" style="color: red"></p>
+        </form>
+      </div>
+
+      <div id="logins">
+        <div id="admin-login">
+          <form id="admin">
+            <label for="admin-credential">Admin Email Id</label>
+            <input
+              type="email"
+              id="admin-credential"
+              placeholder="email@gmail.com"
+            />
+            <br />
+
+            <label for="admin-credential">Password</label>
+            <input type="password" id="admin-password" placeholder="Password" />
+            <br />
+
+            <button type="submit" id="loginbtna">Log In</button>
+          </form>
+        </div>
+
+        <div id="user-login">
+          <form id="user">
+            <label for="user-credential">Email Id</label>
+            <input
+              type="email"
+              id="user-credential"
+              placeholder="email@gmail.com"
+            />
+            <br />
+
+            <label for="user-credential">Password</label>
+            <input type="password" id="upassword" placeholder="password" />
+            <br />
+            <button type="submit" id="loginbtn">Log In</button>
+            <p id="loginError" style="color: red"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Products</title>
+    <link rel="stylesheet" href="css/product-pages.css" />
+    <link rel="icon" href="images/olive-leaf-by-vanessa-removebg-preview.png" />
+  </head>
+  <body>
+    <script type="module" src="js/product-pages.js"></script>
+
+    <div id="user-menubar">
+      <div id="img-link">
+        <a
+          ><img
+            src="images/olive-leaf-by-vanessa-removebg-preview.png"
+            style="width: 30px"
+        /></a>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <div class="dropdown">
+            <button id="myDropdown" class="dropbtn">Bags</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="filterSubcategory('Totes')">Totes</a
+              ><br /><br />
+              <a href="#" onclick="filterSubcategory('Handbags')">Handbags</a
+              ><br /><br />
+              <a href="#" onclick="filterSubcategory('Slings')">Slings</a
+              ><br /><br />
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown">
+            <button id="myDropdown" class="dropbtn">Accessories</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="filterSubcategory('Lanyards')">Lanyards</a
+              ><br /><br />
+              <a href="#" onclick="filterSubcategory('Headbands')">Headbands</a
+              ><br /><br />
+              <a href="#" onclick="filterSubcategory('Clips')">Clips</a
+              ><br /><br />
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown">
+            <button id="myDropdown" class="dropbtn">Reusables</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="filterSubcategory('Loofahs')">Loofahs</a
+              ><br /><br />
+              <a href="#" onclick="filterSubcategory('Soap Savers')"
+                >Soap Savers</a
+              ><br /><br />
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#" onclick="filterCategory('Baby Wear, Toys and Blankets')"
+            >Baby Wear, Toys and Blankets</a
+          >
+        </li>
+        <li><a href="#" onclick="filterCategory('Macarame')">Macarame</a></li>
+        <li>
+          <div class="dropdown">
+            <button id="myDropdown" class="dropbtn">Cards</button>
+            <div class="dropdown-content">
+              <a href="#" onclick="filterSubcategory('Black and White Cards')"
+                >Black and White</a
+              ><br /><br />
+              <a href="#" onclick="filterSubcategory('Greeting Cards')"
+                >Greeting Cards</a
+              ><br /><br />
+              <a href="#" onclick="filterCategory('Floral Cards')">Florals</a
+              ><br /><br />
+            </div>
+          </div>
+        </li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+
+      <div class="user-section">
+        <div class="cart">
+          <button id="cartbtn">
+            <img
+              src="images/1325.png"
+              style="width: 40px; position: relative"
+            />
+          </button>
+        </div>
+        <div id="user-profile">
+          <button id="registerbtn">
+            <img
+              src="images/default-profile-account-unknown-icon-black-silhouette-free-vector-removebg-preview.png"
+              style="width: 40px; position: relative"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="showProducts" style="padding: 75px">
+      <h1 id="productHeading">Products</h1>
+      <div
+        id="productsGrid"
+        class="products-grid"
+        style="margin-top: 20px"
+      ></div>
+    </div>
+
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <div style="width: 100%; display: flex; justify-content: center;">
+          <img
+          id="modalProductImage"
+          src=""
+          alt="Product Image"
+          class="modal-image"
+          width="300px"
+        />
+        </div>
+        <br>
+        <h3 id="modalProductName"></h3>
+        <p id="modalProductDescription"></p>
+        <p id="modalProductPrice"></p>
+        <button id="modalAddToCartBtn" style="width: 150px;">Add to Cart</button>
+        <br>
+        <div id="reviews">
+          <h3>Reviews</h3>
+          <div id="reviews-list"></div>
+          <h5>Leave a review</h5>
+          <div>
+            <textarea id="reviewText" placeholder="Leave a Review"></textarea
+            ><br />
+            <button id="submitReviewBtn" type="submit">Submit Review</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        height: 300px;
+        width: 100%;
+        padding: 30px;
+        margin: 0;
+        margin-top: 100px;
+        background-color: #4c6550;
+        display: flex;
+        flex-direction: row;
+      "
+    >
+      <div style="justify-content: flex-end; display: flex">
+        <img
+          src="images/olive-leaf-by-vanessa-removebg-preview.png"
+          width="250px"
+        />
+      </div>
+      <div id="contact" style="display: flex; flex-direction: column">
+        <p><strong>Email ID:</strong><a> adminemail@gmail.com</a></p>
+        <p><strong>Phone No.:</strong> +91 00000 00000</p>
+        <p><strong>Address:</strong> admin address</p>
+      </div>
+      <hr style="height: 250px" />
+      <div id="pages" style="display: flex; flex-direction: column">
+        <li><a href="product-pages.html">Totes</a></li>
+        <li><a href="product-pages.html">Handbags</a></li>
+        <li><a href="product-pages.html">Slings</a></li>
+        <li><a href="product-pages.html">Lanyards</a></li>
+        <li><a href="product-pages.html">Headbands</a></li>
+        <li><a href="product-pages.html">Clips</a></li>
+      </div>
+      <div id="pages" style="display: flex; flex-direction: column">
+        <li><a href="product-pages.html">Loofahs</a></li>
+        <li><a href="product-pages.html">Soap Savers</a></li>
+        <li><a href="product-pages.html">Baby Wear, Toys and Blankets</a></li>
+        <li><a href="product-pages.html">Macarame</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="about.html">About</a></li>
+      </div>
+    </div>
+  </body>
+</html>

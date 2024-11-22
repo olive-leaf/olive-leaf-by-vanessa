@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Olive Leaf by Vanessa</title>
+
+    <link rel="stylesheet" href="css/inventory.css" />
+    <link rel="icon" href="images/olive-leaf-by-vanessa-removebg-preview.png" />
+  </head>
+  <body>
+    <script type="module" src="./js/inventory.js"></script>
+
+    <div id="user-menubar">
+      <div id="img-link">
+        <a
+          ><img
+            src="images/olive-leaf-by-vanessa-removebg-preview.png"
+            style="width: 30px"
+        /></a>
+      </div>
+      <ul>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="orders.html">Order Tracking</a></li>
+      </ul>
+
+      <div class="admin-section">
+        <div id="admin-logout">
+          <button id="logoutbtn">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="inventory">
+      <h1>Inventory Management</h1>
+      <button id="addProductButton">Add Products</button>
+
+      <div id="inventoryGrid" class="inventoryGrid"></div>
+    </div>
+
+    <div id="addProductModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2>Add New Product</h2>
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" placeholder="Enter product name" />
+
+        <label for="price">Price</label>
+        <input type="number" id="price" placeholder="Enter price" />
+
+        <label for="category">Category</label><br />
+        <select name="category" id="category" required>
+          <option value="" selected disabled hidden>Select a Category</option>
+          <option value="Bags">Bags</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Reusables">Reusables</option>
+          <option value="Baby Wear, Toys and Blankets">
+            Baby Wear, Toys, Blankets
+          </option>
+          <option value="Macarame">Macarame</option>
+          <option value="Cards">Cards</option></select
+        ><br />
+
+        <label for="subcategory">Sub-Category</label><br />
+        <select name="subcategory" id="subcategory" required></select
+        ><br />
+
+        <label for="material">Material</label>
+        <input
+          type="text"
+          id="material"
+          placeholder="E.g. Cotton Yarn, Paper"
+        />
+
+        <label for="color">Color</label>
+        <input type="text" id="color" placeholder="E.g. Red, Orange, Yellow" />
+
+        <label for="adddate">Date Added</label>
+        <input id="adddate" type="date" />
+
+        <label for="productDescription">Product Description</label>
+        <textarea
+          id="productDescription"
+          placeholder="Enter product description"
+        ></textarea>
+
+        <label for="image">Attach Images</label>
+        <input type="file" id="imageUpload" accept="image/*" />
+
+        <button id="addProductModalButton">Add Product</button>
+        <button id="closeModalButton">Cancel</button>
+      </div>
+    </div>
+  </body>
+</html>
